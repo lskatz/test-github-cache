@@ -11,8 +11,7 @@ jobs:
         python: [ '3.7' ]
     name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
-      - name: Get Date
-        id: get-date
+      - id: get-date
         run: |
           today=$(/bin/date -u '+%Y%m%d')
           echo $today

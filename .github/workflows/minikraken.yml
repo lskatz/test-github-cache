@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: apt-get
         run: |
-          sudo apt-get -y install ca-certificates wget build-essential curl tree openssl
+          sudo apt-get -y install ca-certificates wget build-essential curl tree openssl libssl-dev libssl1.1
       - name: Get Date
         id: get-date
         run: |

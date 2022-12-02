@@ -18,7 +18,9 @@ jobs:
         run: |
           sudo apt-cache search libssl
           echo
-          sudo apt-get -y install ca-certificates wget build-essential curl tree libssl3
+          sudo apt-get -y install ca-certificates curl wget build-essential curl tree libssl3
+          echo
+          sudo update-ca-certificates
       - name: Get Date
         id: get-date
         run: |

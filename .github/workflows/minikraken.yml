@@ -38,7 +38,8 @@ jobs:
         run: |
           mkdir -pv ${{ env.KRAKEN_DEFAULT_DB }}
           cd ${{ env.KRAKEN_DEFAULT_DB }}
-          wget --no-check-certificate --progress=dot https://ccb.jhu.edu/software/kraken/dl/minikraken_20171101_4GB_dustmasked.tgz
+          #wget --no-check-certificate --progress=dot https://ccb.jhu.edu/software/kraken/dl/minikraken_20171101_4GB_dustmasked.tgz
+          curl -k https://ccb.jhu.edu/software/kraken/dl/minikrak en_20171101_4GB_dustmasked.tgz
           tar -zxf minikraken_20171101_4GB_dustmasked.tgz
           mv -nv minikraken_20171101_4GB_dustmasked/* . # flatten db dir
           ls -lhSR ${{ env.KRAKEN_DEFAULT_DB }}

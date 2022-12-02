@@ -19,13 +19,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/kraken-database
-          key: minikraken-${{ runner.os }}-build-${{ env.cache-name }}
+          key: minikraken-${{ runner.os }}
       - name: install minikraken
         if: steps.cache-minikraken.outputs.cache-hit != 'true'
         run: |
           mkdir -v ~/kraken-database
           cd ~/kraken-database
-          wget --progress=dot https://ccb.jhu.edu/software/kraken/dl/minikraken_20171101_4GB_dustmasked.tgz
-          tar -zxf minikraken_20171101_4GB_dustmasked.tgz
-          mv -nv minikraken_20171101_4GB_dustmasked/* . # flatten db dir
-          ls -lhSR ~/kraken-database
+          touch file1 file2 file3
+          mkdir taxonomy

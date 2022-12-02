@@ -14,6 +14,10 @@ jobs:
         python: [ '3.7' ]
     name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
+      - name: check directory 1
+        run: |
+          pwd
+          ls -lhR
       - name: Cache minikraken
         id: cache-minikraken
         uses: actions/cache@v3
@@ -27,3 +31,7 @@ jobs:
           cd ~/kraken-database
           touch file1 file2 file3
           mkdir taxonomy
+      - name: check directory 2
+        run: |
+          pwd
+          ls -lhR

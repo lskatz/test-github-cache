@@ -14,6 +14,12 @@ jobs:
         python: [ '3.7' ]
     name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
+      - name: Get Date
+        id: get-date
+        run: |
+          today=$(/bin/date -u '+%Y%m%d')
+          echo $today
+          echo "today=$today" >> $GITHUB_OUTPUT
       - name: check directory 1
         run: |
           pwd
@@ -23,7 +29,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/kraken-database
-          key: minikraken-${{ runner.os }}
+          key: minikraken-${{ runner.os }}-${{ steps.get-date.outputs.today }}
       - name: install minikraken
         if: steps.cache-minikraken.outputs.cache-hit != 'true'
         run: |

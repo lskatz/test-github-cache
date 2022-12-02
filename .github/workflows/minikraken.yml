@@ -39,7 +39,7 @@ jobs:
           mkdir -pv ${{ env.KRAKEN_DEFAULT_DB }}
           cd ${{ env.KRAKEN_DEFAULT_DB }}
           #wget --no-check-certificate --progress=dot https://ccb.jhu.edu/software/kraken/dl/minikraken_20171101_4GB_dustmasked.tgz
-          curl -k https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20220908.tar.gz
+          curl -k https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20220908.tar.gz > k2_viral_20220908.tar.gz
           tar zxvf https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20220908.tar.gz
           tree
       - name: check directory 2

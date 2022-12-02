@@ -1,0 +1,43 @@
+name: kraken-cache
+on: [push]
+
+env:
+  KRAKEN_DEFAULT_DB: ~/kraken-database
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-22.04' ]
+        perl: [ '5.26.2' ]
+        python: [ '3.7' ]
+    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    steps:
+      - name: apt-get
+        run: |
+          sudo apt-get -y install ca-certificates wget 
+      - name: Get Date
+        id: get-date
+        run: |
+          today=$(/bin/date -u '+%Y%m%d')
+          echo $today
+          echo "today=$today" >> $GITHUB_OUTPUT
+      - name: Cache minikraken
+        id: cache-minikraken
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.KRAKEN_DEFAULT_DB }}
+          key: minikraken-${{ runner.os }}-${{ steps.get-date.outputs.today }}
+      - name: install minikraken
+        #if: steps.cache-minikraken.outputs.cache-hit != 'true'
+        run: |
+          mkdir -pv ${{ env.KRAKEN_DEFAULT_DB }}
+          cd ${{ env.KRAKEN_DEFAULT_DB }}
+          wget --progress=dot https://ccb.jhu.edu/software/kraken/dl/minikraken_20171101_4GB_dustmasked.tgz
+          tar -zxf minikraken_20171101_4GB_dustmasked.tgz
+          mv -nv minikraken_20171101_4GB_dustmasked/* . # flatten db dir
+          ls -lhSR ${{ env.KRAKEN_DEFAULT_DB }}
+      - name: check directory 2
+        run: |
+          ls -lhR ${{ env.KRAKEN_DEFAULT_DB }}

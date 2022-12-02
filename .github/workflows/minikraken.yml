@@ -34,7 +34,7 @@ jobs:
           path: ${{ env.KRAKEN_DEFAULT_DB }}
           key: minikraken-${{ runner.os }}-${{ steps.get-date.outputs.today }}
       - name: install minikraken
-        #if: steps.cache-minikraken.outputs.cache-hit != 'true'
+        if: steps.cache-minikraken.outputs.cache-hit != 'true'
         run: |
           mkdir -pv ${{ env.KRAKEN_DEFAULT_DB }}
           cd ${{ env.KRAKEN_DEFAULT_DB }}

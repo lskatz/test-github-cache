@@ -1,8 +1,8 @@
-name: kraken-cache
+name: simple-cache
 on: [push]
 
 env:
-  KRAKEN_DEFAULT_DB: ~/kraken-database
+  KRAKEN_DEFAULT_DB: ~/kraken-database-null
 
 jobs:
   build:

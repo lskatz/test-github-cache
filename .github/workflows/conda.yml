@@ -38,4 +38,7 @@ jobs:
         if: steps.cache-conda.outputs.cache-hit != 'true'
         run: | 
           mamba install -y perl==${{ matrix.perl }}
+      - name: check installation
+        run: |
+          perl -v
 

@@ -18,3 +18,9 @@ jobs:
           today=$(/bin/date -u '+%Y%m%d')
           echo $today
           echo "today=$today" >> $GITHUB_OUTPUT
+      - name: Cache Conda env
+        id: cache-conda
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.CONDA_PKGS_DIR }}
+          key: conda-${{ runner.os }}--${{ runner.arch }}--${{ steps.get-date.outputs.today }}-perl_v${{ matrix.perl }}

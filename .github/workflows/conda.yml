@@ -39,6 +39,9 @@ jobs:
         run: | 
           mamba install -y perl==${{ matrix.perl }}
       - name: check installation
+        shell: bash -el {0}
         run: |
           perl -v
+          echo
+          which perl
 

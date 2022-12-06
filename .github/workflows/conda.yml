@@ -22,7 +22,7 @@ jobs:
         id: cache-conda
         uses: actions/cache@v3
         with:
-          path: ${{ env.CONDA_PKGS_DIR }}
+          path: ~/conda_pkgs_dir
           key: conda-${{ runner.os }}--${{ runner.arch }}--${{ steps.get-date.outputs.today }}-perl_v${{ matrix.perl }}
        - name: set up conda
          uses: conda-incubator/setup-miniconda@v2
@@ -33,9 +33,9 @@ jobs:
            mamba-version: "*"
            auto-activate-base: true
            activate-environment: ""
-      - name: conda installations
-        shell: bash -el {0}
-        if: steps.cache-conda.outputs.cache-hit != 'true'
-        run: | 
-          mamba install -y perl==${{ matrix.perl }}
+       - name: conda installations
+         shell: bash -el {0}
+         if: steps.cache-conda.outputs.cache-hit != 'true'
+         run: | 
+           mamba install -y perl==${{ matrix.perl }}
 

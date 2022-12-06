@@ -18,12 +18,6 @@ jobs:
           today=$(/bin/date -u '+%Y%m%d')
           echo $today
           echo "today=$today" >> $GITHUB_OUTPUT
-      - name: Cache Conda env
-        id: cache-conda
-        uses: actions/cache@v3
-        with:
-          path: ~/conda_pkgs_dir
-          key: conda-${{ runner.os }}--${{ runner.arch }}--${{ steps.get-date.outputs.today }}-perl_v${{ matrix.perl }}
       - name: set up conda
         uses: conda-incubator/setup-miniconda@v2
         with:
@@ -33,6 +27,12 @@ jobs:
           mamba-version: "*"
           auto-activate-base: true
           activate-environment: ""
+      - name: Cache Conda env
+        id: cache-conda
+        uses: actions/cache@v3
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}--${{ runner.arch }}--${{ steps.get-date.outputs.today }}-perl_v${{ matrix.perl }}
       - name: conda installations
         shell: bash -el {0}
         if: steps.cache-conda.outputs.cache-hit != 'true'
@@ -43,5 +43,8 @@ jobs:
         run: |
           perl -v
           echo
+          python -V
+          echo
           which perl
+          which python
 

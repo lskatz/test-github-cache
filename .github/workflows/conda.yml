@@ -7,8 +7,8 @@ jobs:
     strategy:
       matrix:
         os: ['ubuntu-22.04' ]
-        perl: [ '5.26.2' ]
-        python: [ '3.7' ]
+        #perl: [ '5.26.2' ]
+        #python: [ '3.7' ]
     name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
     # Error on the steps yml for some reason
     steps:
@@ -39,7 +39,7 @@ jobs:
         shell: bash -el {0}
         if: steps.cache-conda.outputs.cache-hit != 'true'
         run: | 
-          mamba install -y perl==${{ matrix.perl }} mashtree
+          mamba install -y perl mashtree
       - name: check installation
         shell: bash -el {0}
         run: |
